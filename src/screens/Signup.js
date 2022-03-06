@@ -16,7 +16,7 @@ import {
     ExtraText,
     TextLink,
     TextLinkContent
-} from './../components/styles';
+} from '../components/styles';
 import { Formik } from 'formik';
 import { View } from 'react-native';
 import {Octicons,Ionicons} from '@expo/vector-icons';
@@ -32,7 +32,7 @@ const Signup = ({navigation}) => {
     return (
         <StyledContainer>
             <InnerContainer>
-                <PageLogo resizeMode="cover" source={require('./../assets/images/logo.png')}/>
+                <PageLogo resizeMode="cover" source={require('../../assets/images/logo.png')}/>
                 <PageTitle>Account Signup</PageTitle>
                 
                 <Formik

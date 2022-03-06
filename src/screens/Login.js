@@ -16,7 +16,7 @@ import {
     ExtraText,
     TextLink,
     TextLinkContent
-} from './../components/styles';
+} from '../components/styles';
 import { Formik } from 'formik';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import {Octicons,Ionicons} from '@expo/vector-icons';
@@ -33,7 +33,7 @@ const Login = ({navigation}) => {
     return (
         <StyledContainer>
             <InnerContainer>
-                <Logo style={styles.LogoLogin}resizeMode="cover" source={require('./../assets/images/logo.png')}/>
+                <Logo style={styles.LogoLogin}resizeMode="cover" source={require('../../assets/images/logo.png')}/>
                 <Title style={styles.PageTitleLogin} >Account Login</Title>
                 
                 <Formik
