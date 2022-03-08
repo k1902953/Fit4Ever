@@ -20,6 +20,7 @@ import {
 import { Formik } from 'formik';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import {Octicons,Ionicons} from '@expo/vector-icons';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
 const {brand, darkLight} = Colors;
 
@@ -31,7 +32,7 @@ const Login = ({navigation}) => {
     const Logo = Image;
 
     return (
-        <StyledContainer>
+        <KeyboardAvoidingWrapper><StyledContainer>
             <InnerContainer>
                 <Logo style={styles.LogoLogin}resizeMode="cover" source={require('../../assets/images/logo.png')}/>
                 <Title style={styles.PageTitleLogin} >Account Login</Title>
@@ -65,6 +66,7 @@ const Login = ({navigation}) => {
                 </Formik>
             </InnerContainer>
         </StyledContainer>
+        </KeyboardAvoidingWrapper>
     );
 };
 

@@ -20,17 +20,17 @@ import {
 import { Formik } from 'formik';
 import { View } from 'react-native';
 import {Octicons,Ionicons} from '@expo/vector-icons';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+
 
 const {brand, darkLight} = Colors;
 
 
 const Signup = ({navigation}) => {
     const [hidePassword, setHidePassword] = useState(true);
-    
-
 
     return (
-        <StyledContainer>
+        <KeyboardAvoidingWrapper><StyledContainer>
             <InnerContainer>
                 <PageLogo resizeMode="cover" source={require('../../assets/images/logo.png')}/>
                 <PageTitle>Account Signup</PageTitle>
@@ -92,6 +92,7 @@ const Signup = ({navigation}) => {
                 </Formik>
             </InnerContainer>
         </StyledContainer>
+        </KeyboardAvoidingWrapper>
     );
 };
 
