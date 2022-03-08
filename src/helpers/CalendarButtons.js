@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { View, Pressable, StyleSheet } from 'react-native';
-var iconValue ;
+import { View, Pressable, StyleSheet, Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+var workoutDay ;
 const CalendarButtons = ({ data, onSelect}) => {
+    const navigation = useNavigation();
     const [userOption, setUserOption] = useState('');
     const selectHandler = (value) => {
         onSelect(value);
@@ -12,16 +14,14 @@ const CalendarButtons = ({ data, onSelect}) => {
             {data.map((item, i) => {
                 const dayValue = i+1;
                 return (
-                    // <Pressable key={dayValue}
-                    // onPress={() => {
-                    //     // iconValue = dayValue
-                    //     // selectHandler(item.value.props.name)
-                    // }}
-                    // >
-                        <View style={styles.itemStyle}> 
+                    <Pressable key={dayValue} style={styles.center} onPress={() => {
+                        workoutDay = dayValue,
+                        navigation.navigate('Workout', {workoutDay})
+                    }}>
+                        <View>
                             {item.value}
                         </View>
-                    // </Pressable>
+                    </Pressable>
                 );
             })}
         </View>
@@ -30,16 +30,14 @@ const CalendarButtons = ({ data, onSelect}) => {
 
 const styles = StyleSheet.create({
     itemContainer:{
-        flex: 1,
+        // flex: 1,
         flexDirection:'row',
         flexWrap:'wrap',
         justifyContent: 'space-evenly',
+    },
+    center:{
         alignItems: 'center',
-    },
-    itemStyle:{
-        width: "30%",
-        
-    },
+    }
 });
 
 export default CalendarButtons;

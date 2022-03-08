@@ -5,6 +5,7 @@ import Login from '../screens/Login';
 import Signup from '../screens/Signup';
 import Account from '../screens/Account';
 import MainScreen from '../screens/Main';
+import Workout from '../screens/Workout';
 import { Colors } from '../components/styles';
 
 const {primary, black} = Colors;
@@ -26,10 +27,11 @@ const RootStack = () => {
                     }
                 }}
                 initialRouteName = "Main" 
-                >
+            >
                 <Stack.Screen name="Login" component={Login}/>
                 <Stack.Screen name="Signup" component={Signup}/>
                 <Stack.Screen name="Main" component={MainScreen}/>
+                <Stack.Screen name="Workout" component={Workout}/>
                 <Stack.Screen options={{ headerTintColor: black}} name="Account" component={Account}/>
             </Stack.Navigator>
         </NavigationContainer>

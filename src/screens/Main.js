@@ -17,7 +17,6 @@ import CalendarBtns from '../helpers/CalendarButtons';
 
 const Main =({navigation}) => {
     const [complete, setComplete] = useState('');
-
     const calendar = [
         {
             value: <Daylist number= "1" colour = {complete != true}/>
@@ -121,9 +120,8 @@ const Main =({navigation}) => {
             )
         })
     },[]);
-
     return (
-        <InnerContainer >
+        <InnerContainer>
             <ScrollView style={styles.scrollView} horizontal={false}>
                 <Text style={styles.PageTitle}>Workout Calendar</Text>
                 <View>
@@ -141,14 +139,12 @@ const styles = StyleSheet.create({
         color: '#2c2f36',
         padding: 10
     },
-    header:{
-        //flex: 2,
+    header: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
     },
-    icon:{
-        // position: "absolute",
+    icon: {
         width: 35,
         height: 35
     },

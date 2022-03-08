@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Pressable, ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet, Text, View } from 'react-native';
 
-const DayList = ({navigation, number, colour}) => {
+const DayList = ({ number, colour, navigation}) => {
     const items = []
     for(let index = 1; index < 5; index++) {
             items.push(<Text>Day {index}</Text>)
@@ -12,18 +11,16 @@ const DayList = ({navigation, number, colour}) => {
             backgroundColor: colour ? 'white' : 'lightgrey', 
             borderWidth: 1,
             borderColor: '#e69557',
-            alignItems: 'center',
             borderRadius: 5,
             padding: 5,
             marginVertical: 5,
-            height: 95,
+            width: 125,
+            height: 120,
             }}>
-            <Pressable style={styles.center} onPress={() => {
-                navigation.navigate()}}>
+            <View style={styles.center}>
                 <Text style={styles.nameText}>Day</Text>
-                {/* {items} */}
                 <Text style={styles.dateText}>{number}</Text>
-            </Pressable>
+            </View>
         </View>
     )
 }
@@ -33,16 +30,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     nameText: {
-        fontSize: 20, 
+        fontSize: 23, 
         color: 'black',
         fontWeight: 'bold',
         marginTop: 10
     },
     dateText: {
-        fontSize: 25, 
+        fontSize: 33, 
         color: '#e69557',
         fontWeight: 'bold',
-        marginTop: 10,
+        marginTop: 10
     },
     img: {
         width: 250, 
