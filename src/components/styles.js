@@ -128,9 +128,25 @@ height: 55px;
 align-items: center;
 `;
 
+export const StyledButton2 = styled.TouchableOpacity`
+padding: 15px;
+borderWidth: 1px;
+borderColor: ${brand};
+justify-content: center;
+border-radius: 5px;
+margin-vertical: 5px;
+height: 55px;
+align-items: center;
+`;
+
 export const ButtonText = styled.Text`
 font-size: 16px;
 color: ${primary};
+`;
+
+export const ButtonText2 = styled.Text`
+font-size: 16px;
+color: ${black};
 `;
 
 export const ExtraView = styled.View`
