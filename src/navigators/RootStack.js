@@ -26,7 +26,7 @@ const RootStack = () => {
                         paddingLeft: 20
                     }
                 }}
-                initialRouteName = "Main" 
+                initialRouteName = "Login" 
             >
                 <Stack.Screen name="Login" component={Login}/>
                 <Stack.Screen name="Signup" component={Signup}/>
