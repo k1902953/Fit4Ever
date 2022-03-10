@@ -1,17 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {View, Text, StyleSheet, Button, Pressable, ScrollView} from 'react-native';
-import {
-    StyledContainer,
-    InnerContainer,
-    PageTitle,
-    StyledFormArea,
-    StyledButton, 
-    ButtonText,
-    AccountContainer,
-    Avatar,
-    SubTitle,
-    Line,
-} from '../components/styles';
+import {View, Text, StyleSheet, Button, Pressable, ScrollView, Image} from 'react-native';
+import { primary, black, secondary, darkLight } from '../components/styles';
 import Daylist from '../components/DayList';
 import CalendarBtns from '../helpers/CalendarButtons';
 
@@ -115,20 +104,20 @@ const Main =({navigation}) => {
                 <Pressable style={styles.header} onPress ={() => 
                     navigation.navigate('Account')}>
                     <Text> Welcome "name".</Text>
-                    <Avatar style={styles.icon} resizeMode="center" source={require('./../../assets/images/avatar.png')}/>
+                    <Image style={styles.icon} resizeMode="center" source={require('./../../assets/images/avatar.png')}/>
                 </Pressable>
             )
         })
     },[]);
     return (
-        <InnerContainer>
+        <View style={styles.InnerContainer}>
             <ScrollView style={styles.scrollView} horizontal={false}>
                 <Text style={styles.PageTitle}>Workout Calendar</Text>
                 <View>
                     <CalendarBtns data={calendar} onSelect={(value) => setComplete(value)}/> 
                 </View>
             </ScrollView>
-        </InnerContainer>
+        </View>
     )
 };
 const styles = StyleSheet.create({
@@ -139,6 +128,14 @@ const styles = StyleSheet.create({
         color: '#2c2f36',
         padding: 10
     },
+    InnerContainer:{
+        flex:1,
+        padding : 25,
+        width: '100%',
+        alignContent: 'center',
+        // color: primary,
+        backgroundColor: 'white'
+    },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
@@ -146,10 +143,15 @@ const styles = StyleSheet.create({
     },
     icon: {
         width: 35,
-        height: 35
+        height: 35,
+        borderRadius: 50,
+        borderWidth: 1,
+        borderColor: secondary,
+        margin: 10,
+        
     },
     scrollView:{
-        marginTop: 110,
+        marginTop: 70,
     }
 });
 export default Main;

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
     },
     center:{
-        alignItems: 'center',
+        // alignItems: 'center',
     }
 });
 

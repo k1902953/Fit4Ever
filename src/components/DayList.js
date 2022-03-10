@@ -13,8 +13,8 @@ const DayList = ({ number, colour, navigation}) => {
             borderColor: '#e69557',
             borderRadius: 5,
             padding: 5,
-            marginVertical: 5,
-            width: 125,
+            marginVertical: 4,
+            width: 115,
             height: 120,
             }}>
             <View style={styles.center}>

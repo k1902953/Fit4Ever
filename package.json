@@ -18,6 +18,7 @@
     "expo-constants": "~13.0.1",
     "expo-status-bar": "~1.2.0",
     "firebase": "8.2.3",
+    "fitness_npm_project": "^1.1.0",
     "formik": "^2.2.9",
     "react": "17.0.1",
     "react-dom": "17.0.1",

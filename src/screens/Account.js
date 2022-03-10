@@ -38,7 +38,7 @@ const Account = ({navigation}) => {
                 <Avatar style={styles.AvatarAccount}resizeMode="cover" source={require('./../../assets/images/avatar.png')}/>
                 <Text style={styles.SubTitleAccount}>Full Name:{}</Text>
                 <Text style={styles.SubTitleAccount}>Email: {auth.currentUser?.email}</Text>
-                <StyledFormArea style={styles.Form}>
+                <StyledFormArea>
                     <Line style={styles.AccountLine}/>
                     <StyledButton style={styles.Button} onPress={HandleLogOut}>
                         <ButtonText style={styles.ButtonText}>Logout</ButtonText>
@@ -55,14 +55,13 @@ const styles = StyleSheet.create({
         flex:1,
         padding : 25,
         width: '100%',
-        alignItems: 'center',
         backgroundColor: primary
     },
     
     AccountContainer: {
         padding: 25,
         paddingTop: 30,
-        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: primary
     },
 
@@ -73,9 +72,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: secondary,
         marginTop: 10,
-        marginBottom: 10,
-        marginLeft: 75
-
+        marginBottom: 10
     },
     
     LogoAccount: {
@@ -98,11 +95,6 @@ const styles = StyleSheet.create({
         color:black,
         marginBottom: 5,
         textAlign: "center"
-        
-    },
-
-    Form: {
-        width: 90
     },
 
     AccountLine:{
@@ -113,15 +105,13 @@ const styles = StyleSheet.create({
         marginLeft: -10
     },
     Button: {
-
         width: 270,
         backgroundColor: '#e69557',
         justifyContent: 'center',
-        alignContent: 'center',
         borderRadius: 10,
         marginVertical: 5,
         height: 55,
-        alignItems: 'center',
+        alignItems: 'center'
     }, 
 
     Text: {
