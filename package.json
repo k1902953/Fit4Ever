@@ -16,6 +16,7 @@
     "again": "^0.0.1",
     "expo": "~44.0.0",
     "expo-constants": "~13.0.1",
+    "expo-sensors": "~11.1.0",
     "expo-status-bar": "~1.2.0",
     "firebase": "8.2.3",
     "fitness_npm_project": "^1.1.0",
@@ -23,11 +24,13 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-circular-progress-indicator": "^2.0.6",
+    "react-native-reanimated": "~2.3.1",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
+    "react-native-svg": "12.1.1",
     "react-native-web": "0.17.1",
-    "styled-components": "^5.3.3",
-    "expo-sensors": "~11.1.0"
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
