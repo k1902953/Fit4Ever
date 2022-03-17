@@ -10,6 +10,15 @@ const StepCounter = ({navigation}) =>{
 
     const [PedomaterAvailability, SetPedomaterAvailability] = useState("");
     const [StepCount, SetStepCount] = useState(0);
+
+    //approx 1300 steps in 1 km
+    var Dist = StepCount / 1312;
+    //to keep only 4 decimals places when Dist is calculated.
+    var DistanceCovered = Dist.toFixed(4);
+    
+    //62 calories burnt per km
+    var cal = DistanceCovered * 62;
+    var caloriesBurnt = cal.toFixed(4);
     
     useEffect(() => {
         subscribe();
@@ -55,9 +64,27 @@ const StepCounter = ({navigation}) =>{
                 />
        </View>
 
-       </View>
+       <View style={{ flex: 2, justifyContent: "center" }}>
+           <View style={{ flex: 1 }}>
+               <Text style={[styles.textDesign, { paddingLeft: 20, marginLeft: '23%' },]}>
+                   Target : 6500 steps(5kms)
+               </Text>
+        </View>
+        <View style={{ flex: 1 }}>
+            <Text style={[styles.textDesign, { width: "93%", paddingLeft: 20, marginLeft: '-3.5%' },]}>
+                Distance Covered : {DistanceCovered} km
+            </Text>
+        </View>
+        
+        <View style={{ flex: 1 }}>
+            <Text style={[ styles.textDesign,{paddingLeft: 10, marginLeft: '23%' },]}>
+                Calories Burnt : {caloriesBurnt}
+            </Text>
+        </View>
+        <StatusBar style="auto" />
+        </View>
+        </View>
         );
-
 }
 
 const styles = StyleSheet.create({
@@ -71,6 +98,20 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: "#e69557",
         fontWeight: "bold",
+      },
+      
+    textDesign: {
+        backgroundColor: '#e69557',
+        height: 50,
+        width : '85%',
+        borderColor: "white",
+        borderWidth: 1,
+        borderRadius: 20,
+        overflow: "hidden",
+        fontSize: 20,
+        color: "white",
+        fontWeight: "bold",
+        fontFamily: "Papyrus",
       },
 });
 
