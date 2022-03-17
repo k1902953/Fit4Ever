@@ -7,6 +7,7 @@ import Account from '../screens/Account';
 import MainScreen from '../screens/Main';
 import Workout from '../screens/Workout';
 import { Colors } from '../components/styles';
+import StepCounter from '../screens/StepCounter';
 
 const {primary, black} = Colors;
 const Stack = createNativeStackNavigator();
@@ -26,12 +27,13 @@ const RootStack = () => {
                         paddingLeft: 20
                     }
                 }}
-                initialRouteName = "Main" 
+                initialRouteName = "StepCounter" 
             >
                 <Stack.Screen name="Login" component={Login}/>
                 <Stack.Screen name="Signup" component={Signup}/>
                 <Stack.Screen name="Main" component={MainScreen}/>
                 <Stack.Screen name="Workout" component={Workout}/>
+                <Stack.Screen name="StepCounter" component={StepCounter}/>
                 <Stack.Screen options={{ headerTintColor: black}} name="Account" component={Account}/>
             </Stack.Navigator>
         </NavigationContainer>
