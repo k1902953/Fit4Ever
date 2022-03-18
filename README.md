@@ -8,3 +8,6 @@ INSTUCTIONS:
 5.  In the terminal enter: npm i or npm install
 6.  Once it has completed (you may have warning alerts but thats fine) enter: npm start
 7.  Scan QR code with device or open in web browser.
+
+DEPENDENCIES:
+expo install expo-camera
