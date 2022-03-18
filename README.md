@@ -11,3 +11,6 @@ INSTUCTIONS:
 
 DEPENDENCIES:
 expo install expo-camera
+npm install form-data
+npm install fs
+npm install https
