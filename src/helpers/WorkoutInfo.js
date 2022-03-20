@@ -94,7 +94,7 @@ const daysWorkout = [
 ]
 export const ItemProvider = ({children}) => {
     return (
-        <WorkoutInfo.Provider value={exercise}>
+        <WorkoutInfo.Provider key={Math.floor(Math.random()*99999)} value={exercise}>
             {children}
         </WorkoutInfo.Provider>
     );

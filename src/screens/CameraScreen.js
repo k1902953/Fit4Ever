@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { primary, black, secondary, darkLight, brand } from '../components/styles';
 import { Camera } from 'expo-camera';
 import { MaterialIcons } from '@expo/vector-icons'; 
+import { manipulateAsync, SaveFormat } from 'expo-image-manipulator';
 
 const CameraScreen =({ navigation, route }) => {
     const {workoutDay} = route.params;
@@ -22,10 +23,19 @@ const CameraScreen =({ navigation, route }) => {
     }
 
     let camera;
+    // const ratio = await camera.getAvailablePictureSizeAsync();
+    
     const getPicture = async () => {
         if(camera){
             const photo = await camera.takePictureAsync();
-            navigation.navigate('Workout', {foodImage: photo.uri, workoutDay})
+            // setImage(photo);
+            const manipResult = await manipulateAsync(
+                photo.uri,
+                [{ resize: { width: 640, height: 480 } }],
+                { compress: 0.7, format: SaveFormat.JPEG }
+            );
+            // navigation.navigate('Workout', {foodImage: photo.uri, workoutDay})
+            navigation.navigate('Scan', {foodImage: manipResult.uri})
         }
     }
 
@@ -65,7 +75,7 @@ const styles= StyleSheet.create({
         flex:1,
         backgroundColor: 'transparent',
         alignItems: 'center',
-        flexDirection: 'column-reverse'
+        flexDirection: 'column-reverse',
     },
     iconStyle:{
        position: 'relative',

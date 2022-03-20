@@ -2,10 +2,13 @@ import React, {useContext} from "react";
 import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { primary, black, secondary, darkLight, brand } from '../components/styles';
 import WorkoutInfo from '../helpers/WorkoutInfo'
+import ScanMeal from '../helpers/ScanMeal'
+
 const Workout = ({route, navigation}) => {
     const {workoutDay} = route.params;
     const {foodImage} = route.params;
     const value = useContext(WorkoutInfo);
+    // const scan = useContext(ScanMeal);
     const data = [];
     
     for (let index = 0; index < 3; index++) {
@@ -13,7 +16,7 @@ const Workout = ({route, navigation}) => {
         data.push({key:Math.floor(Math.random()*99999) , workout: x});
     }
     // console.log({data});
-
+    // console.log({scan});
     return (
         
         <View style={styles.styledContainer}>
@@ -26,7 +29,7 @@ const Workout = ({route, navigation}) => {
                     keyExtractor={(e) => e.id}
                     renderItem={({item}) => {
                         return (
-                            <>
+                            <View >
                                 <Text style={styles.pad}>{item.workout.workoutName}</Text>
                                 <View style={styles.itemContainer}>
                                     <View style={styles.box}>
@@ -42,7 +45,7 @@ const Workout = ({route, navigation}) => {
                                     <Text style={styles.nameText}>How to:</Text>
                                     <Text>{item.workout.steps}</Text>
                                 </View>
-                            </>
+                            </View>
                         )
                     }}
                 /> 

@@ -9,6 +9,7 @@ import Workout from '../screens/Workout';
 import Camera from '../screens/CameraScreen';
 import { Colors } from '../components/styles';
 import {ItemProvider} from '../helpers/WorkoutInfo'
+import ScanMeal from '../helpers/ScanMeal';
 
 
 const {primary, black} = Colors;
@@ -37,6 +38,7 @@ const RootStack = () => {
                     <Stack.Screen name="Main" component={MainScreen}/>
                     <Stack.Screen name="Workout" component={Workout}/>
                     <Stack.Screen name="Camera" component={Camera}/>
+                    <Stack.Screen name="Scan" component={ScanMeal}/>
                     <Stack.Screen options={{ headerTintColor: black}} name="Account" component={Account}/>
                 </Stack.Navigator>
             </NavigationContainer>
