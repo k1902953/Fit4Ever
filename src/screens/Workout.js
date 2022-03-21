@@ -1,49 +1,63 @@
-import React from "react";
-import { View, Pressable, Text, StyleSheet, Image, Button, TouchableOpacity } from 'react-native';
-// import { Button } from "react-native-web";
-import { StyledContainer,
-    PageTitle,
-    StyledButton,
-    StyledButton2,
-    ButtonText,
-    ButtonText2,
-    Avatar,
-} from '../components/styles';
+import React, {useContext} from "react";
+import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { primary, black, secondary, darkLight, brand } from '../components/styles';
-// import { fitness } from 'fitness_npm_project';
+import WorkoutInfo from '../helpers/WorkoutInfo'
+import ScanMeal from '../helpers/ScanMeal'
 
-const Workout = ({route}) => {
+const Workout = ({route, navigation}) => {
     const {workoutDay} = route.params;
-    // let fitness = require('fitness_npm_project');
+    const {foodImage} = route.params;
+    const value = useContext(WorkoutInfo);
+    // const scan = useContext(ScanMeal);
+    const data = [];
+    
+    for (let index = 0; index < 3; index++) {
+        const x = value[Math.floor((Math.random() * 6) + 1)];
+        data.push({key:Math.floor(Math.random()*99999) , workout: x});
+    }
+    // console.log({data});
+    // console.log({scan});
     return (
+        
         <View style={styles.styledContainer}>
-            <View style={styles.pad}>
-                <Text style={styles.pageTitle}>DAY {workoutDay}</Text>
-                <Image source={require('./../../assets/images/AccountImage.jpg')}/>
-                <Text style={styles.pad}>Dolphin Plank</Text>
-            </View>
-            <View style={styles.itemContainer}>
-                <View style={styles.box}>
-                    <Text style={styles.nameText}>Duration:</Text>
-                    <Text style={styles.subText}>30mins</Text>
+                <View style={styles.pad}>
+                    <Text style={styles.pageTitle}>DAY {workoutDay}</Text>
+                    <Image style={styles.mainImg} source={require('./../../assets/images/AccountImage.jpg')}/>    
                 </View>
-                <View style={styles.box}>
-                    <Text style={styles.nameText}>Progression:</Text>
-                    <Text style={styles.subText}>100%</Text>
+                <FlatList style={styles.list}
+                    data={data}
+                    keyExtractor={(e) => e.id}
+                    renderItem={({item}) => {
+                        return (
+                            <View >
+                                <Text style={styles.pad}>{item.workout.workoutName}</Text>
+                                <View style={styles.itemContainer}>
+                                    <View style={styles.box}>
+                                        <Text style={styles.nameText}>Duration:</Text>
+                                        <Text style={styles.subText}>{item.workout.duration}</Text>
+                                    </View>
+                                    <View style={styles.box}>
+                                        <Text style={styles.nameText}>Progression:</Text>
+                                        <Text style={styles.subText}>100%</Text>
+                                    </View>
+                                </View>
+                                <View style={styles.box2}>
+                                    <Text style={styles.nameText}>How to:</Text>
+                                    <Text>{item.workout.steps}</Text>
+                                </View>
+                            </View>
+                        )
+                    }}
+                /> 
+                <View>
+                    <Image style = {styles.img} source ={{uri:foodImage}}/>
                 </View>
-            </View>
-            <View>
-                {/* {fitness.GetsExercises()} */}
-            </View>
-            {/* <View>
-                <Text style={styles.subText}>Track Your Run</Text>
-            </View> */}
-            <TouchableOpacity style={styles.buttons}>
-                <Text style={styles.textLinkContent}>Add Meal</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttons2}>
-                <Text style={styles.textLinkContent}>Share Progress</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.buttons} onPress={() => navigation.navigate("Camera" , {workoutDay})}>
+                    <Text style={styles.textLinkContent}>Add Meal</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttons2}>
+                    <Text style={styles.textLinkContent}>Share Progress</Text>
+                </TouchableOpacity>
         </View>
     );
 };
@@ -57,9 +71,24 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingTop: 10,
     },
+    list:{
+        maxHeight:230,
+        marginBottom: 20
+    },
     textLinkContent: {
         color: brand,
         fontSize: 16,
+    },
+    mainImg:{
+        maxHeight: 200,
+        maxWidth: 250,
+    },
+    img:{
+        
+        minHeight: 200,
+        minWidth: 200,
+        position: 'relative',
+        alignSelf: 'flex-start',
     },
     buttons: {
         flex: 1,
@@ -98,7 +127,7 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
         justifyContent: 'space-evenly',
         marginTop: 20,
-        marginBottom: 40
+        marginBottom: 20
     },
     pageTitle:{
         fontSize: 30,
@@ -113,6 +142,12 @@ const styles = StyleSheet.create({
         padding: 20,
         borderRadius: 5,
         alignItems: 'center',
+        margin:5
+    },
+    box2:{
+        backgroundColor: '#fafafa',
+        padding: 20,
+        borderRadius: 5,
         margin:5
     },
     nameText: {
