@@ -32,7 +32,6 @@ const CameraScreen =({ navigation, route }) => {
             const manipResult = await manipulateAsync(
                 photo.uri,
                 [{ resize: { width: 640, height: 480 } }],
-                { compress: 0.7, format: SaveFormat.JPEG }
             );
             // navigation.navigate('Workout', {foodImage: photo.uri, workoutDay})
             navigation.navigate('Scan', {foodImage: manipResult.uri})
