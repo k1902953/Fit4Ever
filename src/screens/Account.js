@@ -36,7 +36,6 @@ const Account = ({navigation}) => {
                 <Logo style={styles.LogoAccount}resizeMode="cover" source={require('../../assets/images/logo.png')}/>
                 <Title style={styles.TitleAccount} >Account</Title>
                 <Avatar style={styles.AvatarAccount}resizeMode="cover" source={require('./../../assets/images/avatar.png')}/>
-                <Text style={styles.SubTitleAccount}>Full Name:{}</Text>
                 <Text style={styles.SubTitleAccount}>Email: {auth.currentUser?.email}</Text>
                 <StyledFormArea>
                     <Line style={styles.AccountLine}/>
