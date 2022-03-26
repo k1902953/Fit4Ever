@@ -1,22 +1,29 @@
-import React, {useContext} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { primary, black, secondary, darkLight, brand } from '../components/styles';
 import WorkoutInfo from '../helpers/WorkoutInfo'
-import ScanMeal from '../helpers/ScanMeal'
+const FormData = require("form-data");
 
 const Workout = ({route, navigation}) => {
-    const {workoutDay} = route.params;
-    const {foodImage} = route.params;
+    const {workoutDay, foodImage, foodName, calories, energy, fat, fiber, carbs, protein} = route.params;
     const value = useContext(WorkoutInfo);
-    // const scan = useContext(ScanMeal);
+    const [foodInfo, setFoodInfo] = useState('');
     const data = [];
-    
+
     for (let index = 0; index < 3; index++) {
         const x = value[Math.floor((Math.random() * 6) + 1)];
         data.push({key:Math.floor(Math.random()*99999) , workout: x});
     }
-    // console.log({data});
-    // console.log({scan});
+
+    useEffect(()=> {
+        setFoodInfo("Calories: "+calories +
+                    "\nEnergy: "+energy +
+                    "\nFat: "+fat +
+                    "\nCarbs: "+carbs +
+                    "\nProtein: "+protein +
+                    "\nFiber: "+fiber 
+        );
+    },[])
     return (
         
         <View style={styles.styledContainer}>
@@ -38,7 +45,7 @@ const Workout = ({route, navigation}) => {
                                     </View>
                                     <View style={styles.box}>
                                         <Text style={styles.nameText}>Progression:</Text>
-                                        <Text style={styles.subText}>100%</Text>
+                                       
                                     </View>
                                 </View>
                                 <View style={styles.box2}>
@@ -49,8 +56,12 @@ const Workout = ({route, navigation}) => {
                         )
                     }}
                 /> 
-                <View>
+                <View style={styles.itemContainer}>
                     <Image style = {styles.img} source ={{uri:foodImage}}/>
+                    <View style = {styles.box3}>
+                        <Text style = {styles.bodyTitle}>{foodName}</Text>
+                        <Text style = {styles.bodyText}>{foodInfo}</Text>
+                    </View>
                 </View>
                 <TouchableOpacity style={styles.buttons} onPress={() => navigation.navigate("Camera" , {workoutDay})}>
                     <Text style={styles.textLinkContent}>Add Meal</Text>
@@ -68,7 +79,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         color: '#2c2f36',
-        padding: 10,
         paddingTop: 10,
     },
     list:{
@@ -84,9 +94,8 @@ const styles = StyleSheet.create({
         maxWidth: 250,
     },
     img:{
-        
-        minHeight: 200,
-        minWidth: 200,
+        minHeight: 180,
+        minWidth: 180,
         position: 'relative',
         alignSelf: 'flex-start',
     },
@@ -94,7 +103,7 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 5,
         width: 300,
-        maxHeight: 70,
+        minHeight: 70,
         backgroundColor: '#e69557',
         justifyContent: 'center',
         alignContent: 'center',
@@ -105,7 +114,7 @@ const styles = StyleSheet.create({
         flex: 1,
         margin: 5,
         width: 300,
-        maxHeight: 70,
+        minHeight: 70,
         borderColor: '#e69557',
         borderWidth: 1,
         justifyContent: 'center',
@@ -137,6 +146,18 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingTop: 10
     },
+    bodyTitle: {
+        fontSize: 23, 
+        color: 'black',
+        paddingBottom: 10,
+        fontWeight: '300',
+        textTransform: 'capitalize'
+    },
+    bodyText: {
+        fontSize: 20, 
+        color: 'black',
+        fontWeight: '200',
+    },
     box:{
         backgroundColor: '#e5e7eb',
         padding: 20,
@@ -150,6 +171,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         margin:5
     },
+    box3:{
+        margin:10,
+        marginTop: 0
+    },
     nameText: {
         fontSize: 23, 
         color: 'black',
@@ -158,8 +183,7 @@ const styles = StyleSheet.create({
     },
     subText: {
         fontSize: 20, 
-        color: 'black',
-        
+        color: 'black'
     },
 });
 
