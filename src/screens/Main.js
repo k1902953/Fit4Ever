@@ -3,6 +3,8 @@ import {View, Text, StyleSheet, Button, Pressable, ScrollView, Image} from 'reac
 import { primary, black, secondary, darkLight } from '../components/styles';
 import Daylist from '../components/DayList';
 import CalendarBtns from '../helpers/CalendarButtons';
+import { auth } from "../Firebase/firebase";
+
 
 const Main =({navigation}) => {
     const [complete, setComplete] = useState('');
@@ -103,7 +105,7 @@ const Main =({navigation}) => {
             headerRight: () => (
                 <Pressable style={styles.header} onPress ={() => 
                     navigation.navigate('Account')}>
-                    <Text> Welcome "name".</Text>
+                    <Text> Welcome {auth.currentUser?.email}.</Text>
                     <Image style={styles.icon} resizeMode="center" source={require('./../../assets/images/avatar.png')}/>
                 </Pressable>
             )
