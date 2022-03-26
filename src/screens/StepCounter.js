@@ -109,9 +109,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         overflow: "hidden",
         fontSize: 20,
-        color: "white",
-        fontWeight: "bold",
-        fontFamily: "Papyrus",
+        color: "white"
       },
 });
 
