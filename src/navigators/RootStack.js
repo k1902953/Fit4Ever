@@ -25,7 +25,7 @@ const RootStack = () => {
                         headerStyle: {
                             backgroundColor: 'transparent'
                         },
-                        headerTintColor: primary,
+                        headerTintColor: "black",
                         headerTransparent: true,
                         headerTitle: '',
                         headerLeftContainerStyle: {
