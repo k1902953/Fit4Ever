@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { View, Pressable, StyleSheet, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet } from 'react-native';
 
 const WorkoutInfo = React.createContext();
 const exercise = [
@@ -86,12 +85,6 @@ const yogaPoses = [
     },
 ];
 
-const daysWorkout = [
-    {
-    
-        // Math.floor(Math.random()*99999),
-    }
-]
 export const ItemProvider = ({children}) => {
     return (
         <WorkoutInfo.Provider key={Math.floor(Math.random()*99999)} value={exercise}>

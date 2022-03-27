@@ -10,7 +10,7 @@ INSTUCTIONS:
 7.  Scan QR code with device or open in web browser.
 
 DEPENDENCIES:
-expo install expo-camera
-npm install form-data
-npm install fs
-npm install https
+- expo install expo-camera
+- expo-image-manipulator
+- npm install form-data
+- expo install @react-native-async-storage/async-storage
