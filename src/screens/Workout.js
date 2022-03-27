@@ -1,61 +1,89 @@
 import React, {useContext, useState, useEffect} from "react";
 import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import MealInfo from "../components/MealInfo";
 import { primary, black, secondary, darkLight, brand } from '../components/styles';
-import WorkoutInfo from '../helpers/WorkoutInfo'
-const FormData = require("form-data");
 
 const Workout = ({route, navigation}) => {
-    const {workoutDay, foodImage, foodName, calories, energy, fat, fiber, carbs, protein} = route.params;
-    const value = useContext(WorkoutInfo);
+    const {id, workoutDay, workout1, workout2, workout3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage} = route.params;
+    const {state} = useContext(MealInfo);
+    const currentItem = state.find((e) => e.id === id);
     const [foodInfo, setFoodInfo] = useState('');
+    
     const data = [];
 
-    for (let index = 0; index < 3; index++) {
-        const x = value[Math.floor((Math.random() * 6) + 1)];
-        data.push({key:Math.floor(Math.random()*99999) , workout: x});
-    }
-
-    useEffect(()=> {
-        setFoodInfo("Calories: "+calories +
-                    "\nEnergy: "+energy +
-                    "\nFat: "+fat +
-                    "\nCarbs: "+carbs +
-                    "\nProtein: "+protein +
-                    "\nFiber: "+fiber 
+    const getFoodInfo = async () => {
+        setFoodInfo(calories +
+                    "\n"+energy +
+                    "\n"+fat +
+                    "\n"+carbs +
+                    "\n"+protein +
+                    "\n"+fiber 
         );
-    },[])
+    }
+    useEffect(()=> {
+        getFoodInfo();
+    },[state])
     return (
-        
-        <View style={styles.styledContainer}>
+        <ScrollView horizontal={false} >
+            <View style={styles.styledContainer}>
                 <View style={styles.pad}>
                     <Text style={styles.pageTitle}>DAY {workoutDay}</Text>
-                    <Image style={styles.mainImg} source={require('./../../assets/images/AccountImage.jpg')}/>    
+                    <Image style={styles.mainImg} source={require('./../../assets/images/AccountImage.jpg')}/>
                 </View>
-                <FlatList style={styles.list}
-                    data={data}
-                    keyExtractor={(e) => e.id}
-                    renderItem={({item}) => {
-                        return (
-                            <View >
-                                <Text style={styles.pad}>{item.workout.workoutName}</Text>
-                                <View style={styles.itemContainer}>
-                                    <View style={styles.box}>
-                                        <Text style={styles.nameText}>Duration:</Text>
-                                        <Text style={styles.subText}>{item.workout.duration}</Text>
-                                    </View>
-                                    <View style={styles.box}>
-                                        <Text style={styles.nameText}>Progression:</Text>
-                                       
-                                    </View>
-                                </View>
-                                <View style={styles.box2}>
-                                    <Text style={styles.nameText}>How to:</Text>
-                                    <Text>{item.workout.steps}</Text>
-                                </View>
-                            </View>
-                        )
-                    }}
-                /> 
+                <View >
+                    <Text style={styles.pad}>{workout1.workoutName}</Text>
+                    <View style={styles.itemContainer}>
+                        <View style={styles.box}>
+                            <Text style={styles.nameText}>Duration:</Text>
+                            <Text style={styles.subText}>{workout1.duration}</Text>
+                        </View>
+                        <View style={styles.box}>
+                            <Text style={styles.nameText}>Progression:</Text>
+                            
+                        </View>
+                    </View>
+                    <View style={styles.box2}>
+                        <Text style={styles.nameText}>How to:</Text>
+                        <Text>{workout1.steps}</Text>
+                    </View>
+                </View>
+
+                <View >
+                    <Text style={styles.pad}>{workout2.workoutName}</Text>
+                    <View style={styles.itemContainer}>
+                        <View style={styles.box}>
+                            <Text style={styles.nameText}>Duration:</Text>
+                            <Text style={styles.subText}>{workout2.duration}</Text>
+                        </View>
+                        <View style={styles.box}>
+                            <Text style={styles.nameText}>Progression:</Text>
+                            
+                        </View>
+                    </View>
+                    <View style={styles.box2}>
+                        <Text style={styles.nameText}>How to:</Text>
+                        <Text>{workout2.steps}</Text>
+                    </View>
+                </View>
+                 
+                <View >
+                    <Text style={styles.pad}>{workout3.workoutName}</Text>
+                    <View style={styles.itemContainer}>
+                        <View style={styles.box}>
+                            <Text style={styles.nameText}>Duration:</Text>
+                            <Text style={styles.subText}>{workout3.duration}</Text>
+                        </View>
+                        <View style={styles.box}>
+                            <Text style={styles.nameText}>Progression:</Text>
+                            
+                        </View>
+                    </View>
+                    <View style={styles.box2}>
+                        <Text style={styles.nameText}>How to:</Text>
+                        <Text>{workout3.steps}</Text>
+                    </View>
+                </View>
+
                 <View style={styles.itemContainer}>
                     <Image style = {styles.img} source ={{uri:foodImage}}/>
                     <View style = {styles.box3}>
@@ -63,13 +91,15 @@ const Workout = ({route, navigation}) => {
                         <Text style = {styles.bodyText}>{foodInfo}</Text>
                     </View>
                 </View>
-                <TouchableOpacity style={styles.buttons} onPress={() => navigation.navigate("Camera" , {workoutDay})}>
+                <TouchableOpacity style={styles.buttons} onPress={() => 
+                    navigation.navigate("Camera" , {id, id})}>
                     <Text style={styles.textLinkContent}>Add Meal</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttons2}>
                     <Text style={styles.textLinkContent}>Share Progress</Text>
                 </TouchableOpacity>
-        </View>
+            </View>
+        </ScrollView>
     );
 };
 
@@ -94,10 +124,10 @@ const styles = StyleSheet.create({
         maxWidth: 250,
     },
     img:{
-        minHeight: 180,
-        minWidth: 180,
+        minHeight: 150,
+        minWidth: 150,
         position: 'relative',
-        alignSelf: 'flex-start',
+        // alignSelf: 'flex-start',
     },
     buttons: {
         flex: 1,
@@ -113,6 +143,7 @@ const styles = StyleSheet.create({
     buttons2: {
         flex: 1,
         margin: 5,
+        marginBottom: 20,
         width: 300,
         minHeight: 70,
         borderColor: '#e69557',

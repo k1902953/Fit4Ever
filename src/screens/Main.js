@@ -1,105 +1,14 @@
-import React, {useEffect, useState} from "react";
-import {View, Text, StyleSheet, Button, Pressable, ScrollView, Image} from 'react-native';
+import React, {useEffect, useState, useContext} from "react";
+import {View, Text, StyleSheet, Button, Pressable, ScrollView, Image, FlatList} from 'react-native';
 import { primary, black, secondary, darkLight } from '../components/styles';
-import Daylist from '../components/DayList';
-import CalendarBtns from '../helpers/CalendarButtons';
 import { auth } from "../Firebase/firebase";
 
+import MealInfo from "../components/MealInfo";
 
 const Main =({navigation}) => {
     const [complete, setComplete] = useState('');
-    const calendar = [
-        {
-            value: <Daylist number= "1" colour = {complete != true}/>
-        },
-        {
-            value: <Daylist number= "2" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "3" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "4" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "5" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "6" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "7" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "8" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "9" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "10" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "11" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "12" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "13" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "14" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "15" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "16" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "17" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "18" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "19" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "20" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "21" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "22" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "23" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "24" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "25" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "26" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "27" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "28" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "29" colour = {complete == true}/>
-        },
-        {
-            value: <Daylist number= "30" colour = {complete == true}/>
-        }
-    ]
+    const {state} = useContext(MealInfo);
+
     useEffect(() => {
         navigation.setOptions({
             headerRight: () => (
@@ -110,15 +19,54 @@ const Main =({navigation}) => {
                 </Pressable>
             )
         })
-    },[]);
+    },[state]);
     return (
         <View style={styles.InnerContainer}>
-            <ScrollView style={styles.scrollView} horizontal={false}>
-                <Text style={styles.PageTitle}>Workout Calendar</Text>
-                <View>
-                    <CalendarBtns data={calendar} onSelect={(value) => setComplete(value)}/> 
-                </View>
-            </ScrollView>
+            <Text style={styles.PageTitle}>Workout Calendar</Text>
+            <FlatList 
+                data={state}
+                keyExtractor={(e) => e.id.toString()}
+                numColumns={3}
+                renderItem={({item}) => {
+                    return (
+                        <Pressable style={styles.list} key={item.workoutDay} onPress={() => {
+                            navigation.navigate('Workout', {
+                                id: item.id,
+                                workoutDay: item.workoutDay,
+                                workout1: item.workout1,
+                                workout2: item.workout2,
+                                workout3: item.workout3,
+                                foodName: item.foodName,
+                                calories: item.calories,
+                                energy: item.energy,
+                                fat: item.fat,
+                                carbs: item.carbs,
+                                protein: item.protein,
+                                fiber: item.fiber,
+                                foodImage: item.foodImage
+                            })
+                        }}>
+                            <View style={{
+                                backgroundColor: item.complete ? 'white' : 'lightgrey', 
+                                borderWidth: 1,
+                                borderColor: '#e69557',
+                                borderRadius: 5,
+                                padding: 5,
+                                marginVertical: 4,
+                                width: 115,
+                                height: 120,
+                                
+                                }}>
+                                <View style={styles.center}>
+                                    <Text style={styles.nameText}>Day</Text>
+                                    <Text style={styles.dateText}>{item.workoutDay}</Text>
+                                </View>
+                            </View>
+                        </Pressable>
+                        
+                    );
+                }}
+            />
         </View>
     )
 };
@@ -130,8 +78,29 @@ const styles = StyleSheet.create({
         color: '#2c2f36',
         padding: 10
     },
+    list: {
+        // flexDirection:'row',
+        margin: 5,
+        marginBottom: 0
+    },
+    center:{
+        alignItems: 'center',
+    },
+    nameText: {
+        fontSize: 23, 
+        color: 'black',
+        fontWeight: 'bold',
+        marginTop: 10
+    },
+    dateText: {
+        fontSize: 33, 
+        color: '#e69557',
+        fontWeight: 'bold',
+        marginTop: 10
+    },
     InnerContainer:{
         flex:1,
+        paddingTop:90,
         padding : 25,
         width: '100%',
         alignContent: 'center',

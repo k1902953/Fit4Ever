@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { manipulateAsync} from 'expo-image-manipulator';
 
 const CameraScreen =({ navigation, route }) => {
-    const {workoutDay} = route.params;
+    const {id, workoutDay} = route.params;
     const [hasPermission, setHasPermission] = useState(null);
     const getPermission = async () => {
         const { status } = await Camera.requestCameraPermissionsAsync();
@@ -30,8 +30,7 @@ const CameraScreen =({ navigation, route }) => {
                 photo.uri,
                 [{ resize: { width: 600, height: 480 } }],
             );
-            // navigation.navigate('Workout', {foodImage: photo.uri, workoutDay})
-            navigation.navigate('Scan', {foodImage: manipResult.uri, workoutDay})
+            navigation.navigate('Scan', {foodManiImage: manipResult.uri, id})
         }
     }
 

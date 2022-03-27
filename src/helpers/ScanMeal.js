@@ -1,29 +1,39 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import MealInfo from "../components/MealInfo";
 import { primary, black, secondary, darkLight, brand } from '../components/styles';
 const FormData = require("form-data");
 
 const ScanMeal = ({route, navigation}) => {
-    const {foodImage, workoutDay} = route.params;
+    const {id, foodManiImage} = route.params;
+    const {state, update} = useContext(MealInfo);
+    const currentItem = state.find((e) => e.id === id);
+
     const [foodNutrition, setFoodNutrition] = useState('');
+    const [workoutDay, setWorkoutDay] = useState(currentItem.workoutDay);
     const [foodName, setFoodName] = useState('Processing Image...');
-    const [calories, setCalories] = useState('Calculating...');
-    const [energy, setEnergy] = useState('Calculating...');
-    const [fat, setFat] = useState('Calculating...');
-    const [carbs, setCarbs] = useState('Calculating...');
-    const [protein, setProtein] = useState('Calculating...');
-    const [fiber, setFiber] = useState('Calculating...');
+    const [calories, setCalories] = useState('Fetching nutrition info...');
+    const [energy, setEnergy] = useState('');
+    const [fat, setFat] = useState('');
+    const [carbs, setCarbs] = useState('');
+    const [protein, setProtein] = useState('');
+    const [fiber, setFiber] = useState('');
+    const [foodImage ,setFoodImage] = useState('');
+    const [workout1, setWorkout1] = useState(currentItem.workout1);
+    const [workout2, setWorkout2] = useState(currentItem.workout2);
+    const [workout3, setWorkout3] = useState(currentItem.workout3);
     
+
     const getResults = async () => {
         var formdata = new FormData();
         formdata.append('image', {
-            uri: foodImage,
+            uri: foodManiImage,
             type: "image/jpeg",
             name: "food.jpg"
         });
         
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer e96f8cf8f7a058285445e759120d28bb36175aa3");
+        myHeaders.append("Authorization", "Bearer c7ab93c88b56e988a8eaa173e652596eca2cca6d");
 
         var requestOptions = {
             method: 'POST',
@@ -35,6 +45,7 @@ const ScanMeal = ({route, navigation}) => {
         await fetch("https://api.logmeal.es/v2/image/recognition/complete", requestOptions)
         .then(response => response.json())
         .then(result => {
+            setFoodImage(foodManiImage);
             myHeaders.append("Content-Type", 'application/json');
             var raw = JSON.stringify({
                 "imageId": result.imageId,
@@ -52,12 +63,12 @@ const ScanMeal = ({route, navigation}) => {
             .then(result2 => {
                 setFoodNutrition(result2);
                 setFoodName(result2.foodName);
-                setCalories(result2.nutritional_info.calories);
-                setEnergy(result2.nutritional_info.totalNutrients.ENERC_KCAL.quantity + " " +result2.nutritional_info.totalNutrients.ENERC_KCAL.unit);
-                setFat(result2.nutritional_info.totalNutrients.FAT.quantity + " " +result2.nutritional_info.totalNutrients.FAT.unit);
-                setCarbs(result2.nutritional_info.totalNutrients.CHOCDF.quantity + " " +result2.nutritional_info.totalNutrients.CHOCDF.unit);
-                setProtein(result2.nutritional_info.totalNutrients.PROCNT.quantity + " " +result2.nutritional_info.totalNutrients.PROCNT.unit);
-                setFiber(result2.nutritional_info.totalNutrients.FIBTG.quantity + " " +result2.nutritional_info.totalNutrients.FIBTG.unit);
+                setCalories("Calories: " + result2.nutritional_info.calories);
+                setEnergy("Energy: " + result2.nutritional_info.totalNutrients.ENERC_KCAL.quantity + " " +result2.nutritional_info.totalNutrients.ENERC_KCAL.unit);
+                setFat("Fat: " + result2.nutritional_info.totalNutrients.FAT.quantity + " " +result2.nutritional_info.totalNutrients.FAT.unit);
+                setCarbs("Carbs: " + result2.nutritional_info.totalNutrients.CHOCDF.quantity + " " +result2.nutritional_info.totalNutrients.CHOCDF.unit);
+                setProtein("Protein: " + result2.nutritional_info.totalNutrients.PROCNT.quantity + " " +result2.nutritional_info.totalNutrients.PROCNT.unit);
+                setFiber("Fiber: " + result2.nutritional_info.totalNutrients.FIBTG.quantity + " " +result2.nutritional_info.totalNutrients.FIBTG.unit);
             })
             .catch(error2 => console.log('error2', error2));
         })
@@ -72,16 +83,17 @@ const ScanMeal = ({route, navigation}) => {
             <Image style = {styles.img} source ={{uri:foodImage}}/>
             <View style={styles.Container}>
                 <Text style = {styles.pageTitle}>{foodName}</Text>
-                <Text style = {styles.bodyText}>Calories: {calories}</Text>
-                <Text style = {styles.bodyText}>Energy: {energy}</Text> 
-                <Text style = {styles.bodyText}>Fat: {fat}</Text>
-                <Text style = {styles.bodyText}>Carbs: {carbs}</Text>
-                <Text style = {styles.bodyText}>Protein: {protein}</Text>
-                <Text style = {styles.bodyText}>Fiber: {fiber}</Text>
+                <Text style = {styles.bodyText}>{calories}</Text>
+                <Text style = {styles.bodyText}>{energy}</Text> 
+                <Text style = {styles.bodyText}>{fat}</Text>
+                <Text style = {styles.bodyText}> {carbs}</Text>
+                <Text style = {styles.bodyText}>{protein}</Text>
+                <Text style = {styles.bodyText}>{fiber}</Text>
             </View>
-            <TouchableOpacity style={styles.buttons} onPress={() => navigation.navigate('Workout' , {
-                workoutDay, foodImage, foodName, calories, energy, fat, carbs, protein, fiber
-            })}>
+            <TouchableOpacity style={styles.buttons} onPress={() => {
+                update(currentItem.id, currentItem.workoutDay, currentItem.workout1, currentItem.workout2, currentItem.workout3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage);
+                navigation.navigate('Workout', {id, workoutDay, workout1, workout2, workout3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage});
+            }}>
                 <Text style={styles.textLinkContent}>Done</Text>
             </TouchableOpacity>
         </View>
@@ -110,7 +122,7 @@ const styles = StyleSheet.create({
         borderRadius: 15
     },
     pageTitle:{
-        fontSize: 30,
+        fontSize: 25,
         textAlign: 'center',
         fontWeight: 'bold',
         color: '#2c2f36',
@@ -119,7 +131,7 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize'
     },
     bodyText: {
-        fontSize: 23, 
+        fontSize: 19, 
         color: 'black',
         paddingBottom: 10,
         fontWeight: '200',
