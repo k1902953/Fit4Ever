@@ -4,10 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Daylist from '../components/DayList';
 import WorkoutInfo from "../helpers/WorkoutInfo";
 
-const STORAGE_KEY = "0000001";
+const STORAGE_KEY = "0000011";
 let data =[];
 const MealInfo = React.createContext();
-// const [complete, setComplete] = useState('');
 
 const reducer = (state, action) => {
     switch (action.type){
@@ -41,8 +40,6 @@ const reducer = (state, action) => {
                     return e;
                 }
             });
-        // case ActionTypes.delete:
-        //     return state.filter((e) => e.id !== action.payload.id);
         case ActionTypes.save:
             try {
                 AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -98,7 +95,6 @@ export const ItemProvider2 = ({children}) => {
                 for (let index = 0; index < 30; index++) {
                     data.push({
                         id: Math.floor(Math.random()*99999),
-                        complete: false,
                         workoutDay: index +1,
                         workout1: value[Math.floor((Math.random() * 6) + 1)],
                         workout2: value[Math.floor((Math.random() * 6) + 1)],

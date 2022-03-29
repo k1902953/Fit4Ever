@@ -158,7 +158,7 @@ const Workout = ({route, navigation}) => {
                 </View>
 
                 <View style={styles.itemContainer}>
-                    {/* <Image style = {styles.img} source ={{uri:foodImage}}/> */}
+                    <Image style = {styles.img} source ={{uri:foodImage}}/>
                     <View style = {styles.box3}>
                         <Text style = {styles.bodyTitle}>{foodName}</Text>
                         <Text style = {styles.bodyText}>{foodInfo}</Text>

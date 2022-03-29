@@ -2,12 +2,14 @@ import React, {useEffect, useState, useContext} from "react";
 import {View, Text, StyleSheet, Button, Pressable, ScrollView, Image, FlatList} from 'react-native';
 import { primary, black, secondary, darkLight } from '../components/styles';
 import { auth } from "../Firebase/firebase";
-
 import MealInfo from "../components/MealInfo";
 
+var prev = false;
+var stop = false;
+
 const Main =({navigation}) => {
-    const [complete, setComplete] = useState('');
     const {state} = useContext(MealInfo);
+    var i = true;
 
     useEffect(() => {
         navigation.setOptions({
@@ -28,8 +30,56 @@ const Main =({navigation}) => {
                 keyExtractor={(e) => e.id.toString()}
                 numColumns={3}
                 renderItem={({item}) => {
+                    if (stop===false){
+                        prev = i
+                        stop = false
+                    }
+                    i = item.finished1&&item.finished2&&item.finished3;
+                    if (prev === true && i === false){
+                        if(stop === true){
+                            stop = false;
+                            return (
+                                <Pressable style={styles.list} key={item.workoutDay} disabled={item.workoutDay !== 1 && !i} onPress={() => {
+                                    navigation.navigate('Workout', {
+                                        id: item.id,
+                                        workoutDay: item.workoutDay,
+                                        workout1: item.workout1,
+                                        workout2: item.workout2,
+                                        workout3: item.workout3,
+                                        foodName: item.foodName,
+                                        calories: item.calories,
+                                        energy: item.energy,
+                                        fat: item.fat,
+                                        carbs: item.carbs,
+                                        protein: item.protein,
+                                        fiber: item.fiber,
+                                        foodImage: item.foodImage
+                                    })
+                                }}>
+                                    <View style={{
+                                        backgroundColor: (item.workoutDay === 1 || i) ? 'white' : 'lightgrey', 
+                                        opacity: (item.workoutDay === 1 || i) ? 1 : .5,
+                                        borderWidth: 1,
+                                        borderColor: '#e69557',
+                                        borderRadius: 5,
+                                        padding: 5,
+                                        marginVertical: 4,
+                                        width: 115,
+                                        height: 120,
+                                        }}>
+                                        <View style={styles.center}>
+                                            <Text style={styles.nameText}>Day</Text>
+                                            <Text style={styles.dateText}>{item.workoutDay}</Text>
+                                        </View>
+                                    </View>
+                                </Pressable>
+                            )
+                        }
+                        stop = true;
+                        i = true;
+                    }
                     return (
-                        <Pressable style={styles.list} key={item.workoutDay} onPress={() => {
+                        <Pressable style={styles.list} key={item.workoutDay} disabled={item.workoutDay !== 1 && !i} onPress={() => {
                             navigation.navigate('Workout', {
                                 id: item.id,
                                 workoutDay: item.workoutDay,
@@ -47,7 +97,8 @@ const Main =({navigation}) => {
                             })
                         }}>
                             <View style={{
-                                backgroundColor: item.complete ? 'white' : 'lightgrey', 
+                                backgroundColor: (item.workoutDay === 1 || i) ? 'white' : 'lightgrey', 
+                                opacity: (item.workoutDay === 1 || i) ? 1 : .5,
                                 borderWidth: 1,
                                 borderColor: '#e69557',
                                 borderRadius: 5,
@@ -63,8 +114,7 @@ const Main =({navigation}) => {
                                 </View>
                             </View>
                         </Pressable>
-                        
-                    );
+                    )
                 }}
             />
         </View>
@@ -79,7 +129,6 @@ const styles = StyleSheet.create({
         padding: 10
     },
     list: {
-        // flexDirection:'row',
         margin: 5,
         marginBottom: 0
     },
@@ -104,13 +153,12 @@ const styles = StyleSheet.create({
         padding : 25,
         width: '100%',
         alignContent: 'center',
-        // color: primary,
         backgroundColor: 'white'
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     icon: {
         width: 35,
@@ -118,11 +166,10 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         borderWidth: 1,
         borderColor: secondary,
-        margin: 10,
-        
+        margin: 10
     },
     scrollView:{
-        marginTop: 70,
+        marginTop: 70
     }
 });
 export default Main;
