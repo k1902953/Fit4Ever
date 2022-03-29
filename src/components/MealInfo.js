@@ -4,8 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Daylist from '../components/DayList';
 import WorkoutInfo from "../helpers/WorkoutInfo";
 
-const STORAGE_KEY = "my_super_secret_key";
-
+const STORAGE_KEY = "0000001";
+let data =[];
 const MealInfo = React.createContext();
 // const [complete, setComplete] = useState('');
 
@@ -20,6 +20,9 @@ const reducer = (state, action) => {
                     workout1: action.payload.workout1, 
                     workout2: action.payload.workout2,
                     workout3: action.payload.workout3,
+                    finished1: action.payload.finished1, 
+                    finished2: action.payload.finished2,
+                    finished3: action.payload.finished3,
                     foodName: action.payload.foodName,
                     calories: action.payload.calories,
                     energy: action.payload.energy,
@@ -57,6 +60,9 @@ const reducer = (state, action) => {
                     workout1: action.payload.workout1, 
                     workout2: action.payload.workout2,
                     workout3: action.payload.workout3,
+                    finished1: action.payload.finished1, 
+                    finished2: action.payload.finished2,
+                    finished3: action.payload.finished3,
                     foodName: action.payload.foodName,
                     calories: action.payload.calories,
                     energy: action.payload.energy,
@@ -75,7 +81,6 @@ const reducer = (state, action) => {
 export const ItemProvider2 = ({children}) => {
     const value = useContext(WorkoutInfo);
     const info = [];
-    let data =[];
     
     const[state, dispatch] = useReducer(reducer, data );
     
@@ -88,6 +93,8 @@ export const ItemProvider2 = ({children}) => {
                     dispatch ({ type: ActionTypes.load, payload: item})
                 });
             }else{
+                console.log("hi");
+                let data =[];
                 for (let index = 0; index < 30; index++) {
                     data.push({
                         id: Math.floor(Math.random()*99999),
@@ -96,6 +103,9 @@ export const ItemProvider2 = ({children}) => {
                         workout1: value[Math.floor((Math.random() * 6) + 1)],
                         workout2: value[Math.floor((Math.random() * 6) + 1)],
                         workout3: value[Math.floor((Math.random() * 6) + 1)],
+                        finished1: false,
+                        finished2: false,
+                        finished3: false,
                         foodName: '',
                         calories: '',
                         energy: '',
@@ -106,6 +116,9 @@ export const ItemProvider2 = ({children}) => {
                         foodImage: ''
                     });
                 }
+                data.forEach((item) => {
+                    dispatch ({ type: ActionTypes.load, payload: item})
+                });
             }
         }
         loadStorage();
@@ -116,8 +129,8 @@ export const ItemProvider2 = ({children}) => {
         dispatch({type: ActionTypes.save})
     };
 
-    const updateItem = (id, workoutDay, workout1, workout2, workout3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage) => {
-        dispatch({type: ActionTypes.update, payload: {id, workoutDay, workout1, workout2, workout3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage}});
+    const updateItem = (id, workoutDay, workout1, workout2, workout3, finished1, finished2, finished3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage) => {
+        dispatch({type: ActionTypes.update, payload: {id, workoutDay, workout1, workout2, workout3, finished1, finished2, finished3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage}});
         dispatch({type: ActionTypes.save})
         
     };

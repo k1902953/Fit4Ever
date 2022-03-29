@@ -33,7 +33,7 @@ const ScanMeal = ({route, navigation}) => {
         });
         
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer c7ab93c88b56e988a8eaa173e652596eca2cca6d");
+        myHeaders.append("Authorization", "Bearer e8035bf68ad0ac76e6762ec1f7d540234c6c157c");
 
         var requestOptions = {
             method: 'POST',
@@ -91,7 +91,7 @@ const ScanMeal = ({route, navigation}) => {
                 <Text style = {styles.bodyText}>{fiber}</Text>
             </View>
             <TouchableOpacity style={styles.buttons} onPress={() => {
-                update(currentItem.id, currentItem.workoutDay, currentItem.workout1, currentItem.workout2, currentItem.workout3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage);
+                update(currentItem.id, currentItem.workoutDay, currentItem.workout1, currentItem.workout2, currentItem.workout3, currentItem.finished1, currentItem.finished2, currentItem.finished3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage);
                 navigation.navigate('Workout', {id, workoutDay, workout1, workout2, workout3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage});
             }}>
                 <Text style={styles.textLinkContent}>Done</Text>

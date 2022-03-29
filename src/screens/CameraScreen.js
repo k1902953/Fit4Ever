@@ -18,7 +18,7 @@ const CameraScreen =({ navigation, route }) => {
     if (hasPermission === null){
         return <Text style={styles.access}>Awaiting Permission</Text>
     }
-    if(hasPermission ===false){
+    if(hasPermission === false){
         return <Text style={styles.access}>Access Denied</Text>
     }
 

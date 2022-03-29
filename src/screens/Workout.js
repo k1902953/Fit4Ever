@@ -1,16 +1,50 @@
 import React, {useContext, useState, useEffect} from "react";
-import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, Pressable, ScrollView, Button } from 'react-native';
 import MealInfo from "../components/MealInfo";
 import { primary, black, secondary, darkLight, brand } from '../components/styles';
 
+let switching1 = false;
+let switching2 = false;
+let switching3 = false;
 const Workout = ({route, navigation}) => {
     const {id, workoutDay, workout1, workout2, workout3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage} = route.params;
-    const {state} = useContext(MealInfo);
+    const {state, update} = useContext(MealInfo);
     const currentItem = state.find((e) => e.id === id);
     const [foodInfo, setFoodInfo] = useState('');
+    const [finished1, setFinished1] = useState(currentItem.finished1);
+    const [finished2, setFinished2] = useState(currentItem.finished2);
+    const [finished3, setFinished3] = useState(currentItem.finished3);
     
-    const data = [];
+    var updatingF1 = async ()=>{
+        update(currentItem.id, currentItem.workoutDay, currentItem.workout1, currentItem.workout2, currentItem.workout3, finished1, currentItem.finished2, currentItem.finished3, currentItem.foodName, currentItem.calories, currentItem.energy, currentItem.fat, currentItem.carbs, currentItem.protein, currentItem.fiber, currentItem.foodImage);
+    };
+    var updatingF2 = async ()=>{
+        update(currentItem.id, currentItem.workoutDay, currentItem.workout1, currentItem.workout2, currentItem.workout3, currentItem.finished1, finished2, currentItem.finished3, currentItem.foodName, currentItem.calories, currentItem.energy, currentItem.fat, currentItem.carbs, currentItem.protein, currentItem.fiber, currentItem.foodImage);
+    };
+    var updatingF3 = async ()=>{
+        update(currentItem.id, currentItem.workoutDay, currentItem.workout1, currentItem.workout2, currentItem.workout3, currentItem.finished1, currentItem.finished2, finished3, currentItem.foodName, currentItem.calories, currentItem.energy, currentItem.fat, currentItem.carbs, currentItem.protein, currentItem.fiber, currentItem.foodImage);
+    };
 
+    var button1pressed = async () => {
+        if(switching1 === true){
+            setFinished1(switching1);
+            updatingF1();
+        }
+    };
+    var button2pressed = async () => {
+        if(switching2 === true){
+            setFinished2(switching2);
+            updatingF2();
+        }
+    };
+    var button3pressed = async () => {
+        if(switching3 === true){
+            setFinished3(switching3);
+            updatingF3();
+        }
+    };
+
+    
     const getFoodInfo = async () => {
         setFoodInfo(calories +
                     "\n"+energy +
@@ -21,6 +55,12 @@ const Workout = ({route, navigation}) => {
         );
     }
     useEffect(()=> {
+        button1pressed();
+        button2pressed();
+        button3pressed();
+        switching1 = false;
+        switching2 = false;
+        switching3 = false;
         getFoodInfo();
     },[state])
     return (
@@ -30,16 +70,27 @@ const Workout = ({route, navigation}) => {
                     <Text style={styles.pageTitle}>DAY {workoutDay}</Text>
                     <Image style={styles.mainImg} source={require('./../../assets/images/AccountImage.jpg')}/>
                 </View>
-                <View >
+                <View>
                     <Text style={styles.pad}>{workout1.workoutName}</Text>
                     <View style={styles.itemContainer}>
                         <View style={styles.box}>
                             <Text style={styles.nameText}>Duration:</Text>
                             <Text style={styles.subText}>{workout1.duration}</Text>
                         </View>
-                        <View style={styles.box}>
-                            <Text style={styles.nameText}>Progression:</Text>
-                            
+                        <View style={styles.fin}>
+                            <Pressable style={{ 
+                                backgroundColor: finished1 ? 'lightgreen' : '#e5e7eb', 
+                                padding: 25,
+                                paddingLeft: 35,
+                                paddingRight: 35,
+                                borderRadius: 10}} 
+                                onPress={() =>  {
+                                    switching1 = true
+                                    button1pressed()
+                                }}
+                            >
+                                <Text style={styles.textLinkContent}>Finished</Text>
+                            </Pressable>
                         </View>
                     </View>
                     <View style={styles.box2}>
@@ -55,9 +106,20 @@ const Workout = ({route, navigation}) => {
                             <Text style={styles.nameText}>Duration:</Text>
                             <Text style={styles.subText}>{workout2.duration}</Text>
                         </View>
-                        <View style={styles.box}>
-                            <Text style={styles.nameText}>Progression:</Text>
-                            
+                        <View style={styles.fin}>
+                            <TouchableOpacity style={{ 
+                                backgroundColor: finished2 ? 'lightgreen' : '#e5e7eb', 
+                                padding: 25,
+                                paddingLeft: 35,
+                                paddingRight: 35,
+                                borderRadius: 10}} 
+                                onPress={() =>  {
+                                    switching2 = true
+                                    button2pressed()
+                                }}
+                            >
+                                <Text style={styles.textLinkContent}>Finished</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.box2}>
@@ -73,9 +135,20 @@ const Workout = ({route, navigation}) => {
                             <Text style={styles.nameText}>Duration:</Text>
                             <Text style={styles.subText}>{workout3.duration}</Text>
                         </View>
-                        <View style={styles.box}>
-                            <Text style={styles.nameText}>Progression:</Text>
-                            
+                        <View style={styles.fin}>
+                            <TouchableOpacity style={{ 
+                                backgroundColor: finished3 ? 'lightgreen' : '#e5e7eb', 
+                                padding: 25,
+                                paddingLeft: 35,
+                                paddingRight: 35,
+                                borderRadius: 10}} 
+                                onPress={() =>  {
+                                    switching3 = true
+                                    button3pressed()
+                                }}
+                            >
+                                <Text style={styles.textLinkContent}>Finished</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.box2}>
@@ -85,7 +158,7 @@ const Workout = ({route, navigation}) => {
                 </View>
 
                 <View style={styles.itemContainer}>
-                    <Image style = {styles.img} source ={{uri:foodImage}}/>
+                    {/* <Image style = {styles.img} source ={{uri:foodImage}}/> */}
                     <View style = {styles.box3}>
                         <Text style = {styles.bodyTitle}>{foodName}</Text>
                         <Text style = {styles.bodyText}>{foodInfo}</Text>
@@ -95,8 +168,9 @@ const Workout = ({route, navigation}) => {
                     navigation.navigate("Camera" , {id, id})}>
                     <Text style={styles.textLinkContent}>Add Meal</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.buttons2}>
-                    <Text style={styles.textLinkContent}>Share Progress</Text>
+                <TouchableOpacity style={styles.buttons2} onPress={() => 
+                    navigation.navigate("StepCounter")}>
+                    <Text style={styles.textLinkContent}>Step Counter</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -109,7 +183,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         color: '#2c2f36',
-        paddingTop: 10,
+    },
+    fin:{
+        alignSelf: 'center'
     },
     list:{
         maxHeight:230,
@@ -118,10 +194,12 @@ const styles = StyleSheet.create({
     textLinkContent: {
         color: brand,
         fontSize: 16,
+        alignSelf: 'center',
     },
     mainImg:{
         maxHeight: 200,
         maxWidth: 250,
+        alignSelf: 'center',
     },
     img:{
         minHeight: 150,
@@ -139,6 +217,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         borderRadius: 10,
         alignItems: 'center',
+        alignSelf: 'center',
     }, 
     buttons2: {
         flex: 1,
@@ -152,6 +231,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         borderRadius: 10,
         alignItems: 'center',
+        alignSelf: 'center',
     }, 
     styledContainer:{
         flex:1,
@@ -160,7 +240,7 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         color: primary,
         backgroundColor: 'white',
-        alignItems: 'center',
+        
     },
     itemContainer:{
         flexDirection:'row',
