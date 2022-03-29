@@ -6,6 +6,7 @@ import { primary, black, secondary, darkLight, brand } from '../components/style
 let switching1 = false;
 let switching2 = false;
 let switching3 = false;
+
 const Workout = ({route, navigation}) => {
     const {id, workoutDay, workout1, workout2, workout3, foodName, calories, energy, fat, carbs, protein, fiber, foodImage} = route.params;
     const {state, update} = useContext(MealInfo);
@@ -15,6 +16,30 @@ const Workout = ({route, navigation}) => {
     const [finished2, setFinished2] = useState(currentItem.finished2);
     const [finished3, setFinished3] = useState(currentItem.finished3);
     
+    const mainImage = [
+        {
+            img: <Image style={styles.mainImg} source={require('./../../assets/images/male1.png')}/>
+        },
+        {
+            img: <Image style={styles.mainImg} source={require('./../../assets/images/male2.png')}/>
+        },
+        {
+            img: <Image style={styles.mainImg} source={require('./../../assets/images/run.png')}/>
+        },
+        {
+            img: <Image style={styles.mainImg} source={require('./../../assets/images/plank.png')}/>
+        },
+        {
+            img: <Image style={styles.mainImg} source={require('./../../assets/images/woman1.png')}/>
+        },
+        {
+            img: <Image style={styles.mainImg} source={require('./../../assets/images/woman2.png')}/>
+        },
+        {
+            img: <Image style={styles.mainImg} source={require('./../../assets/images/woman-healthy.png')}/>
+        },
+    ];
+
     var updatingF1 = async ()=>{
         update(currentItem.id, currentItem.workoutDay, currentItem.workout1, currentItem.workout2, currentItem.workout3, finished1, currentItem.finished2, currentItem.finished3, currentItem.foodName, currentItem.calories, currentItem.energy, currentItem.fat, currentItem.carbs, currentItem.protein, currentItem.fiber, currentItem.foodImage);
     };
@@ -68,7 +93,7 @@ const Workout = ({route, navigation}) => {
             <View style={styles.styledContainer}>
                 <View style={styles.pad}>
                     <Text style={styles.pageTitle}>DAY {workoutDay}</Text>
-                    <Image style={styles.mainImg} source={require('./../../assets/images/AccountImage.jpg')}/>
+                    {mainImage[Math.floor((Math.random() * 7))].img}
                 </View>
                 <View>
                     <Text style={styles.pad}>{workout1.workoutName}</Text>
@@ -197,8 +222,10 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     mainImg:{
-        maxHeight: 200,
-        maxWidth: 250,
+        minHeight: 273,
+        minWidth: 350,
+        maxHeight: 273,
+        maxWidth: 350,
         alignSelf: 'center',
     },
     img:{

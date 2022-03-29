@@ -96,9 +96,9 @@ export const ItemProvider2 = ({children}) => {
                     data.push({
                         id: Math.floor(Math.random()*99999),
                         workoutDay: index +1,
-                        workout1: value[Math.floor((Math.random() * 6) + 1)],
-                        workout2: value[Math.floor((Math.random() * 6) + 1)],
-                        workout3: value[Math.floor((Math.random() * 6) + 1)],
+                        workout1: value[Math.floor((Math.random() * 7))],
+                        workout2: value[Math.floor((Math.random() * 7))],
+                        workout3: value[Math.floor((Math.random() * 7))],
                         finished1: false,
                         finished2: false,
                         finished3: false,
