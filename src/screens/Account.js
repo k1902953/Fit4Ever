@@ -43,6 +43,11 @@ const Account = ({navigation}) => {
                         <ButtonText style={styles.ButtonText}>Logout</ButtonText>
                     </StyledButton>
                 </StyledFormArea>
+                <StyledFormArea>
+                    <StyledButton style={styles.Button} onPress={() => navigation.navigate("Main")}>
+                        <ButtonText style={styles.ButtonText}>Calendar</ButtonText>
+                    </StyledButton>
+                </StyledFormArea>
             </Container>
         </MainContainer>
     );
