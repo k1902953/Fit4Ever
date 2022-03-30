@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
-import { primary, black, secondary, darkLight, brand } from '../components/styles';
 import { Camera } from 'expo-camera';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { manipulateAsync} from 'expo-image-manipulator';
 
 const CameraScreen =({ navigation, route }) => {
-    const {id, workoutDay} = route.params;
+    const {id} = route.params;
     const [hasPermission, setHasPermission] = useState(null);
     const getPermission = async () => {
         const { status } = await Camera.requestCameraPermissionsAsync();
@@ -56,7 +55,6 @@ const styles= StyleSheet.create({
     styledContainer:{
         flex:1,
         alignContent: 'center',
-        // color: primary,
         backgroundColor: 'white',
     },
     title:{

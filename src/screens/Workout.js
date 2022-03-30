@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from "react";
-import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, Pressable, ScrollView, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Pressable, ScrollView } from 'react-native';
 import MealInfo from "../components/MealInfo";
-import { primary, black, secondary, darkLight, brand } from '../components/styles';
+import { primary, brand } from '../components/styles';
 
 let switching1 = false;
 let switching2 = false;
@@ -183,7 +183,7 @@ const Workout = ({route, navigation}) => {
                 </View>
 
                 <View style={styles.itemContainer}>
-                    <Image style = {styles.img} source ={{uri:foodImage}}/>
+                    <Image style = {styles.img} source ={foodImage ? {uri:foodImage} : null}/>
                     <View style = {styles.box3}>
                         <Text style = {styles.bodyTitle}>{foodName}</Text>
                         <Text style = {styles.bodyText}>{foodInfo}</Text>
@@ -227,12 +227,13 @@ const styles = StyleSheet.create({
         maxHeight: 273,
         maxWidth: 350,
         alignSelf: 'center',
+        borderRadius: 5
     },
     img:{
         minHeight: 150,
         minWidth: 150,
         position: 'relative',
-        // alignSelf: 'flex-start',
+        borderRadius: 5
     },
     buttons: {
         flex: 1,
@@ -266,8 +267,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignContent: 'center',
         color: primary,
-        backgroundColor: 'white',
-        
+        backgroundColor: 'white'
     },
     itemContainer:{
         flexDirection:'row',

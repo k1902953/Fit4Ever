@@ -1,10 +1,9 @@
 import React, { useReducer, useEffect, useContext} from "react";
 import { ActionTypes } from "../helpers/ActionTypes";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Daylist from '../components/DayList';
 import WorkoutInfo from "../helpers/WorkoutInfo";
 
-const STORAGE_KEY = "0000011";
+const STORAGE_KEY = "0000111";
 let data =[];
 const MealInfo = React.createContext();
 
@@ -90,15 +89,14 @@ export const ItemProvider2 = ({children}) => {
                     dispatch ({ type: ActionTypes.load, payload: item})
                 });
             }else{
-                console.log("hi");
                 let data =[];
                 for (let index = 0; index < 30; index++) {
                     data.push({
                         id: Math.floor(Math.random()*99999),
                         workoutDay: index +1,
-                        workout1: value[Math.floor((Math.random() * 7))],
-                        workout2: value[Math.floor((Math.random() * 7))],
-                        workout3: value[Math.floor((Math.random() * 7))],
+                        workout1: value[Math.floor((Math.random() * 20))],
+                        workout2: value[Math.floor((Math.random() * 20))],
+                        workout3: value[Math.floor((Math.random() * 20))],
                         finished1: false,
                         finished2: false,
                         finished3: false,

@@ -27,14 +27,14 @@ const RootStack = () => {
                             headerStyle: {
                                 backgroundColor: 'transparent'
                             },
-                            // headerTintColor: primary,
+                            headerTintColor: "black",
                             headerTransparent: true,
                             headerTitle: '',
                             headerLeftContainerStyle: {
                                 paddingLeft: 20
                             }
                         }}
-                        initialRouteName = "Main" 
+                        initialRouteName = "Login" 
                     >
                         <Stack.Screen name="Login" component={Login}/>
                         <Stack.Screen name="Signup" component={Signup}/>

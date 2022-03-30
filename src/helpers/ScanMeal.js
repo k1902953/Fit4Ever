@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import MealInfo from "../components/MealInfo";
-import { primary, black, secondary, darkLight, brand } from '../components/styles';
+import {brand } from '../components/styles';
 const FormData = require("form-data");
 
 const ScanMeal = ({route, navigation}) => {

@@ -1,6 +1,6 @@
-import React, {useEffect, useState, useContext} from "react";
-import {View, Text, StyleSheet, Button, Pressable, ScrollView, Image, FlatList} from 'react-native';
-import { primary, black, secondary, darkLight } from '../components/styles';
+import React, {useEffect, useContext} from "react";
+import {View, Text, StyleSheet, Pressable, Image, FlatList} from 'react-native';
+import { secondary } from '../components/styles';
 import { auth } from "../Firebase/firebase";
 import MealInfo from "../components/MealInfo";
 

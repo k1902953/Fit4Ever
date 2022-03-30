@@ -21,7 +21,7 @@ const Signup = ({navigation}) => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                navigation.navigate("Account")
+                navigation.navigate("Main")
 
             }
         })
