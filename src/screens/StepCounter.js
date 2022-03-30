@@ -42,11 +42,11 @@ const StepCounter = ({navigation}) =>{
         return (
         <View style={styles.container}>
             <View style={{ flex: 1, justifyContent: "center" }}>
-                <Text style={styles.titleDesign}>
+                <Text style={styles.titleDesign} >
                     REACH YOUR DAILY STEP COUNT !
                 </Text>
             </View>
-            <View style={{ flex: 3 }}>
+            <View style={{ flex: 3}}>
                 <CircularProgress
                 value={StepCount}
                 maxValue={6500}
@@ -61,6 +61,9 @@ const StepCounter = ({navigation}) =>{
                 titleColor={"#ecf0f1"}
                 titleStyle={{ fontWeight: "bold" }}
                 titleFontSize={40}
+                alignSelf={"center"}
+                alignItems={'center'}
+                justifyContent= {"center"}
                 />
        </View>
 
