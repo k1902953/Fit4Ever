@@ -5,7 +5,7 @@ import { auth } from "../Firebase/firebase";
 import MealInfo from "../components/MealInfo";
 
 var prev = false;
-var stop = false;
+var stop = false    ;
 
 const Main =({navigation}) => {
     const {state} = useContext(MealInfo);
@@ -25,7 +25,7 @@ const Main =({navigation}) => {
     return (
         <View style={styles.InnerContainer}>
             <Text style={styles.PageTitle}>Workout Calendar</Text>
-            <FlatList 
+            <FlatList style={styles.flist}
                 data={state}
                 keyExtractor={(e) => e.id.toString()}
                 numColumns={3}
@@ -63,8 +63,6 @@ const Main =({navigation}) => {
                                         borderColor: '#e69557',
                                         borderRadius: 5,
                                         padding: 5,
-                                        marginVertical: 4,
-                                        width: 115,
                                         height: 120,
                                         }}>
                                         <View style={styles.center}>
@@ -103,8 +101,6 @@ const Main =({navigation}) => {
                                 borderColor: '#e69557',
                                 borderRadius: 5,
                                 padding: 5,
-                                marginVertical: 4,
-                                width: 115,
                                 height: 120,
                                 
                                 }}>
@@ -131,6 +127,10 @@ const styles = StyleSheet.create({
     list: {
         margin: 5,
         marginBottom: 0
+    },
+    list: {
+        width: '30%',
+        margin:5
     },
     center:{
         alignItems: 'center',

@@ -61,9 +61,7 @@ const StepCounter = ({navigation}) =>{
                 titleColor={"#ecf0f1"}
                 titleStyle={{ fontWeight: "bold" }}
                 titleFontSize={40}
-                alignSelf={"center"}
-                alignItems={'center'}
-                justifyContent= {"center"}
+                
                 />
        </View>
 
@@ -94,6 +92,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
+        alignItems:'center',
     },
 
     titleDesign: {
