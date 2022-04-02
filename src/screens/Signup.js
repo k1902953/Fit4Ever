@@ -54,7 +54,7 @@ const Signup = ({navigation}) => {
         <MainContainer style={styles.InnerContainer}><KeyboardAvoidingWrapper>
             <Container style={styles.LoginContainer}>
                 <Logo style={styles.LogoLogin}resizeMode="cover" source={require('../../assets/images/logo.png')}/>
-                <Title style={styles.PageTitleLogin} >Account Signup</Title>
+                <Title style={styles.PageTitleLogin} > Create Account</Title>
                 <StyledFormArea>
                 
                 <View>  

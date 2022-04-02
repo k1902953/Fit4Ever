@@ -49,7 +49,7 @@ const Login = ({navigation}) => {
         <MainContainer style={styles.InnerContainer}><KeyboardAvoidingWrapper>
             <Container style={styles.LoginContainer}>
                 <Logo style={styles.LogoLogin}resizeMode="cover" source={require('../../assets/images/logo.png')}/>
-                <Title style={styles.PageTitleLogin} >Account Login</Title>
+                <Title style={styles.PageTitleLogin} >Login</Title>
                 <StyledFormArea>
                 
                 <View>
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
 
     PageTitleLogin: {
         fontSize: 30,
-        textAlign: 'center',
+        textAlign: 'left',
         fontWeight: 'bold',
         color: '#2c2f36',
         padding: 10,
