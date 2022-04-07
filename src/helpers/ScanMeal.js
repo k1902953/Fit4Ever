@@ -33,7 +33,7 @@ const ScanMeal = ({route, navigation}) => {
         });
         
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer e8035bf68ad0ac76e6762ec1f7d540234c6c157c");
+        myHeaders.append("Authorization", "Bearer 6d0214958a3a52f091d20a6de3a57dda776bc3e9");
 
         var requestOptions = {
             method: 'POST',

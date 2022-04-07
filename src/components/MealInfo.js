@@ -3,7 +3,7 @@ import { ActionTypes } from "../helpers/ActionTypes";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import WorkoutInfo from "../helpers/WorkoutInfo";
 
-const STORAGE_KEY = "0000111";
+const STORAGE_KEY = '0000111';
 let data =[];
 const MealInfo = React.createContext();
 

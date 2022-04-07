@@ -25,7 +25,7 @@ const Main =({navigation}) => {
     return (
         <View style={styles.InnerContainer}>
             <Text style={styles.PageTitle}>Workout Calendar</Text>
-            <FlatList style={styles.flist}
+            <FlatList
                 data={state}
                 keyExtractor={(e) => e.id.toString()}
                 numColumns={3}
@@ -125,10 +125,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     list: {
-        margin: 5,
-        marginBottom: 0
-    },
-    list: {
+        marginBottom: 0,
         width: '30%',
         margin:5
     },
